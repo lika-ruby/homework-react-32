@@ -2,7 +2,7 @@
   "name": "homework-react-10",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://lika-ruby.github.io/homework-react-31/",
+  "homepage": "https://lika-ruby.github.io/homework-react-32/",
   "dependencies": {
     "@redux-devtools/extension": "^3.3.0",
     "@reduxjs/toolkit": "^2.11.2",

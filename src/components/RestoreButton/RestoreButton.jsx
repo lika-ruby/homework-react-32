@@ -1,15 +1,18 @@
 import { useDispatch, useSelector } from "react-redux";
-import { restoreContact } from "../../redux/actions";
+import { restoreContact } from "../../redux/contactsSlice";
 import { Button } from "./RestoreButton.js";
 
 export const RestoreButton = () => {
   const dispatch = useDispatch();
-  const lastDeletedContact = useSelector((state) => state.lastDeletedContact);
+
+  const lastDeletedContact = useSelector(
+    (state) => state.contacts.lastDeletedContact
+  );
+
+  if (!lastDeletedContact) return null;
 
   const handleRestore = () => {
-    if (lastDeletedContact) {
-      dispatch(restoreContact(lastDeletedContact.id));
-    }
+    dispatch(restoreContact());
   };
 
   return (

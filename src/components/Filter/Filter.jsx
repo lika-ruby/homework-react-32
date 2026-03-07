@@ -2,7 +2,7 @@ import { Label, Input } from "./Filter";
 
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { setFilter } from "../../redux/actions";
+import { setFilter } from "../../redux/filterSlice";
 
 export const Filter = () => {
   const dispatch = useDispatch();

@@ -1,7 +1,7 @@
 import { Form, Labels, Label, Input, Button } from "./ContactForm.js";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addContact } from "../../redux/actions.js";
+import { addContact } from "../../redux/contactsSlice.js";
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
