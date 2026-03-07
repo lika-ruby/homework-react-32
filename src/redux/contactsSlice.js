@@ -8,7 +8,7 @@ const contactsInitialState = {
         { id: "id-3", name: "Eden Clements", number: "645-17-79" },
         { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
     ],
-    lastDeletedContact: null
+    lastDeletedContact: null,
 };
 
 const contactsSlice = createSlice({
@@ -17,6 +17,7 @@ const contactsSlice = createSlice({
     reducers: {
         addContact: {
             reducer(state, action) {
+                if (!state.contacts) state.contacts = [];
                 state.contacts.push(action.payload);
             },
             prepare(name, number) {
@@ -30,11 +31,13 @@ const contactsSlice = createSlice({
             },
         },
         deleteContact(state, action) {
+            if (!state.contacts) state.contacts = [];
             const contact = state.contacts.find(c => c.id === action.payload);
             state.contacts = state.contacts.filter(c => c.id !== action.payload);
             state.lastDeletedContact = contact || null;
         },
         restoreContact(state) {
+            if (!state.contacts) state.contacts = [];
             if (state.lastDeletedContact) {
                 state.contacts.push(state.lastDeletedContact);
                 state.lastDeletedContact = null;
@@ -42,5 +45,6 @@ const contactsSlice = createSlice({
         },
     },
 });
+
 export const { addContact, deleteContact, restoreContact } = contactsSlice.actions;
 export const contactsReducer = contactsSlice.reducer;
