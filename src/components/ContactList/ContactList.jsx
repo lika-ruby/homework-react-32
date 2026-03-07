@@ -3,31 +3,28 @@ import { Wrapper, List, Title } from "./ContactList.js";
 import { Filter } from "../Filter/Filter.jsx";
 import { EmptyMessage } from "../EmptyMessage/EmptyMessage.jsx";
 import { Container } from "../Container/Container.jsx";
+
 import { RestoreButton } from "../RestoreButton/RestoreButton.jsx";
 import { useSelector } from "react-redux";
 
 export const ContactList = () => {
-  const allContacts = useSelector((state) => state.contacts.contacts) || [];
-
-  const filter = useSelector((state) => state.filter.filter);
-
+  const allContacts = useSelector((state) => state.contacts);
+  const filter = useSelector((state) => state.filter);
   const lastDeletedContact = useSelector(
     (state) => state.contacts.lastDeletedContact
   );
 
   const contacts = filter
-    ? allContacts.filter((cont) =>
+    ? allContacts.contacts.filter((cont) =>
         cont.name.toLowerCase().includes(filter.toLowerCase())
       )
-    : allContacts;
+    : allContacts.contacts;
 
   return (
     <Container>
       <Wrapper>
         <Title>Your Contacts</Title>
-
         <Filter />
-
         {contacts.length === 0 ? (
           <EmptyMessage />
         ) : (
@@ -42,7 +39,6 @@ export const ContactList = () => {
             ))}
           </List>
         )}
-
         {lastDeletedContact && <RestoreButton />}
       </Wrapper>
     </Container>

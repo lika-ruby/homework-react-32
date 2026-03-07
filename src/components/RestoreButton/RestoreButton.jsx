@@ -4,15 +4,14 @@ import { Button } from "./RestoreButton.js";
 
 export const RestoreButton = () => {
   const dispatch = useDispatch();
-
   const lastDeletedContact = useSelector(
     (state) => state.contacts.lastDeletedContact
   );
 
-  if (!lastDeletedContact) return null;
-
   const handleRestore = () => {
-    dispatch(restoreContact());
+    if (lastDeletedContact) {
+      dispatch(restoreContact());
+    }
   };
 
   return (
