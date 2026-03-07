@@ -3,12 +3,11 @@ import { Wrapper, List, Title } from "./ContactList.js";
 import { Filter } from "../Filter/Filter.jsx";
 import { EmptyMessage } from "../EmptyMessage/EmptyMessage.jsx";
 import { Container } from "../Container/Container.jsx";
-
 import { RestoreButton } from "../RestoreButton/RestoreButton.jsx";
 import { useSelector } from "react-redux";
 
 export const ContactList = () => {
-  const allContacts = useSelector((state) => state.contacts.contacts);
+  const allContacts = useSelector((state) => state.contacts.contacts) || [];
 
   const filter = useSelector((state) => state.filter.filter);
 
@@ -21,11 +20,14 @@ export const ContactList = () => {
         cont.name.toLowerCase().includes(filter.toLowerCase())
       )
     : allContacts;
+
   return (
     <Container>
       <Wrapper>
         <Title>Your Contacts</Title>
+
         <Filter />
+
         {contacts.length === 0 ? (
           <EmptyMessage />
         ) : (
