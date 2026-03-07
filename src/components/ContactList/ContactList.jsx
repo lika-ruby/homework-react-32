@@ -18,8 +18,8 @@ export const ContactList = () => {
   const lastDeletedContact = contactsState.lastDeletedContact;
 
   const contacts = filter
-    ? contactsState.contacts.filter((cont) =>
-        cont.name.toLowerCase().includes(filter.toLowerCase())
+    ? contactsState.contacts.filter((c) =>
+        c.name.toLowerCase().includes(filter.toLowerCase())
       )
     : contactsState.contacts;
 
@@ -32,12 +32,12 @@ export const ContactList = () => {
           <EmptyMessage />
         ) : (
           <List>
-            {contacts.map((cont) => (
+            {contacts.map((c) => (
               <ContactItem
-                key={cont.id}
-                id={cont.id}
-                name={cont.name}
-                number={cont.number}
+                key={c.id}
+                id={c.id}
+                name={c.name}
+                number={c.number}
               />
             ))}
           </List>

@@ -22,18 +22,14 @@ const contactsSlice = createSlice({
             },
             prepare(name, number) {
                 return {
-                    payload: {
-                        id: nanoid(8),
-                        name,
-                        number,
-                    },
+                    payload: { id: nanoid(8), name, number },
                 };
             },
         },
         deleteContact(state, action) {
             if (!state.contacts) state.contacts = [];
-            const contact = state.contacts.find(c => c.id === action.payload);
-            state.contacts = state.contacts.filter(c => c.id !== action.payload);
+            const contact = state.contacts.find((c) => c.id === action.payload);
+            state.contacts = state.contacts.filter((c) => c.id !== action.payload);
             state.lastDeletedContact = contact || null;
         },
         restoreContact(state) {
@@ -45,5 +41,6 @@ const contactsSlice = createSlice({
         },
     },
 });
+
 export const { addContact, deleteContact, restoreContact } = contactsSlice.actions;
 export const contactsReducer = contactsSlice.reducer;
