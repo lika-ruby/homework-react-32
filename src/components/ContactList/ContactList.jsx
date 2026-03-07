@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 export const ContactList = () => {
   const allContacts = useSelector((state) => state.contacts.contacts);
 
-  const filter = useSelector((state) => state.filter);
+  const filter = useSelector((state) => state.filter.filter);
 
   const lastDeletedContact = useSelector(
     (state) => state.contacts.lastDeletedContact
