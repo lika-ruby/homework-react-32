@@ -8,20 +8,17 @@ import { RestoreButton } from "../RestoreButton/RestoreButton.jsx";
 import { useSelector } from "react-redux";
 
 export const ContactList = () => {
-  const contactsState = useSelector((state) => state.contacts);
+  const allContacts = useSelector((state) => state.contacts.contacts);
+  const lastDeletedContact = useSelector(
+    (state) => state.contacts.lastDeletedContact
+  );
   const filter = useSelector((state) => state.filter);
 
-  if (!contactsState || !contactsState.contacts) {
-    return null;
-  }
-
-  const lastDeletedContact = contactsState.lastDeletedContact;
-
   const contacts = filter
-    ? contactsState.contacts.filter((c) =>
-        c.name.toLowerCase().includes(filter.toLowerCase())
+    ? allContacts.filter((cont) =>
+        cont.name.toLowerCase().includes(filter.toLowerCase())
       )
-    : contactsState.contacts;
+    : allContacts;
 
   return (
     <Container>
@@ -32,12 +29,12 @@ export const ContactList = () => {
           <EmptyMessage />
         ) : (
           <List>
-            {contacts.map((c) => (
+            {contacts.map((cont) => (
               <ContactItem
-                key={c.id}
-                id={c.id}
-                name={c.name}
-                number={c.number}
+                key={cont.id}
+                id={cont.id}
+                name={cont.name}
+                number={cont.number}
               />
             ))}
           </List>
