@@ -9,9 +9,7 @@ export const RestoreButton = () => {
   );
 
   const handleRestore = () => {
-    if (lastDeletedContact) {
-      dispatch(restoreContact());
-    }
+    if (lastDeletedContact) dispatch(restoreContact());
   };
 
   return (

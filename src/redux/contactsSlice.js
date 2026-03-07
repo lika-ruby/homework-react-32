@@ -1,5 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { nanoid } from "nanoid";
+import { createSlice, nanoid } from "@reduxjs/toolkit";
 
 const contactsInitialState = {
     contacts: [
@@ -20,14 +19,12 @@ const contactsSlice = createSlice({
                 state.contacts.push(action.payload);
             },
             prepare(name, number) {
-                return {
-                    payload: { id: nanoid(8), name, number },
-                };
+                return { payload: { id: nanoid(8), name, number } };
             },
         },
         deleteContact(state, action) {
-            const contact = state.contacts.find((c) => c.id === action.payload);
-            state.contacts = state.contacts.filter((c) => c.id !== action.payload);
+            const contact = state.contacts.find(c => c.id === action.payload);
+            state.contacts = state.contacts.filter(c => c.id !== action.payload);
             state.lastDeletedContact = contact || null;
         },
         restoreContact(state) {

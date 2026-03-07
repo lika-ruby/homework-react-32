@@ -3,7 +3,6 @@ import { Wrapper, List, Title } from "./ContactList.js";
 import { Filter } from "../Filter/Filter.jsx";
 import { EmptyMessage } from "../EmptyMessage/EmptyMessage.jsx";
 import { Container } from "../Container/Container.jsx";
-
 import { RestoreButton } from "../RestoreButton/RestoreButton.jsx";
 import { useSelector } from "react-redux";
 
