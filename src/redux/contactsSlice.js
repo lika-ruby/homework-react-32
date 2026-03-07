@@ -19,33 +19,22 @@ const contactsSlice = createSlice({
     reducers: {
         addContact: {
             reducer(state, action) {
-                state.contacts = state.contacts || [];
                 state.contacts.push(action.payload);
             },
             prepare(name, number) {
-                return {
-                    payload: {
-                        id: nanoid(8),
-                        name,
-                        number,
-                    },
-                };
+                return { payload: { id: nanoid(8), name, number } };
             },
         },
         deleteContact(state, action) {
-            state.contacts = state.contacts || [];
             const contact = state.contacts.find(c => c.id === action.payload);
             if (!contact) return;
             state.contacts = state.contacts.filter(c => c.id !== action.payload);
             state.lastDeletedContact = contact;
         },
         restoreContact(state) {
-            state.contacts = state.contacts || [];
             if (!state.lastDeletedContact) return;
             const exists = state.contacts.find(c => c.id === state.lastDeletedContact.id);
-            if (!exists) {
-                state.contacts.push(state.lastDeletedContact);
-            }
+            if (!exists) state.contacts.push(state.lastDeletedContact);
             state.lastDeletedContact = null;
         },
     },

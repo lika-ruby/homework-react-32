@@ -8,7 +8,7 @@ import { filterReducer } from "./filterSlice";
 const persistConfig = {
     key: "root",
     storage,
-    whitelist: ["contacts", "filter"],
+    whitelist: ["contacts"],
 };
 
 const rootReducer = combineReducers({
@@ -21,9 +21,7 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 export const store = configureStore({
     reducer: persistedReducer,
     middleware: getDefaultMiddleware =>
-        getDefaultMiddleware({
-            serializableCheck: false,
-        }),
+        getDefaultMiddleware({ serializableCheck: false }),
 });
 
 export const persistor = persistStore(store);
