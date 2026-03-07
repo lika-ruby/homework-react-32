@@ -10,13 +10,18 @@ import { useSelector } from "react-redux";
 export const ContactList = () => {
   const contactsState = useSelector((state) => state.contacts);
   const filter = useSelector((state) => state.filter);
+
+  if (!contactsState || !contactsState.contacts) {
+    return null;
+  }
+
   const lastDeletedContact = contactsState.lastDeletedContact;
 
   const contacts = filter
-    ? (contactsState.contacts || []).filter((cont) =>
+    ? contactsState.contacts.filter((cont) =>
         cont.name.toLowerCase().includes(filter.toLowerCase())
       )
-    : contactsState.contacts || [];
+    : contactsState.contacts;
 
   return (
     <Container>
