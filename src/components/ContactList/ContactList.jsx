@@ -13,10 +13,10 @@ export const ContactList = () => {
   const lastDeletedContact = contactsState.lastDeletedContact;
 
   const contacts = filter
-    ? contactsState.contacts.filter((cont) =>
+    ? (contactsState.contacts || []).filter((cont) =>
         cont.name.toLowerCase().includes(filter.toLowerCase())
       )
-    : contactsState.contacts;
+    : contactsState.contacts || [];
 
   return (
     <Container>
