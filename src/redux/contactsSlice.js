@@ -1,13 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { nanoid } from "nanoid";
 
+const defaultContacts = [
+    { id: "id-1", name: "Rosie Simpson", number: "459-12-56" },
+    { id: "id-2", name: "Hermione Kline", number: "443-89-12" },
+    { id: "id-3", name: "Eden Clements", number: "645-17-79" },
+    { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
+];
+
 const contactsInitialState = {
-    contacts: [
-        { id: "id-1", name: "Rosie Simpson", number: "459-12-56" },
-        { id: "id-2", name: "Hermione Kline", number: "443-89-12" },
-        { id: "id-3", name: "Eden Clements", number: "645-17-79" },
-        { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
-    ],
+    contacts: defaultContacts,
     lastDeletedContact: null,
 };
 
@@ -32,16 +34,19 @@ const contactsSlice = createSlice({
         },
         deleteContact(state, action) {
             state.contacts = state.contacts || [];
-            const contact = state.contacts.find?.(c => c.id === action.payload) || null;
-            state.contacts = state.contacts.filter?.(c => c.id !== action.payload) || [];
+            const contact = state.contacts.find(c => c.id === action.payload);
+            if (!contact) return;
+            state.contacts = state.contacts.filter(c => c.id !== action.payload);
             state.lastDeletedContact = contact;
         },
         restoreContact(state) {
             state.contacts = state.contacts || [];
-            if (state.lastDeletedContact) {
+            if (!state.lastDeletedContact) return;
+            const exists = state.contacts.find(c => c.id === state.lastDeletedContact.id);
+            if (!exists) {
                 state.contacts.push(state.lastDeletedContact);
-                state.lastDeletedContact = null;
             }
+            state.lastDeletedContact = null;
         },
     },
 });
